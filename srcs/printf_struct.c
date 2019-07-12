@@ -6,7 +6,7 @@
 /*   By: hshawand <hshawand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 13:42:41 by hshawand          #+#    #+#             */
-/*   Updated: 2019/07/08 11:49:52 by hshawand         ###   ########.fr       */
+/*   Updated: 2019/07/12 14:21:42 by hshawand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,9 @@ void	ft_struct_process(t_format *c_format, va_list args)
 	else if (c_format->type == 's')
 		ft_print_s(c_format, va_arg(args, char *));
 	else if (c_format->type == 'p')
-		ft_print_p(c_format, va_arg(args, void *));	
+		ft_print_p(c_format, va_arg(args, void *));
+	else if (c_format->type == 'd' || c_format->type == 'i')
+		ft_print_d(c_format, va_arg(args, int64_t));
 }
 
 int		ft_printf_struct(const char *format, ...)
