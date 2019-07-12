@@ -6,7 +6,7 @@
 #    By: hshawand <hshawand@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/04 16:37:05 by hshawand          #+#    #+#              #
-#    Updated: 2019/07/12 13:21:28 by hshawand         ###   ########.fr        #
+#    Updated: 2019/07/12 15:20:00 by hshawand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,7 +69,7 @@ srcs/libft/ft_lstiter.o \
 srcs/libft/ft_lstmap.o \
 srcs/libft/ft_lstnew.o \
 srcs/printf_struct.o \
-srcs/ft_lltoa.o \
+srcs/ft_itoa64.o \
 srcs/parser.o \
 srcs/scp.o \
 srcs/diouxX.o 
