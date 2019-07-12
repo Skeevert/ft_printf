@@ -6,7 +6,7 @@
 /*   By: hshawand <hshawand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/19 12:42:35 by hshawand          #+#    #+#             */
-/*   Updated: 2019/07/08 11:49:51 by hshawand         ###   ########.fr       */
+/*   Updated: 2019/07/12 13:07:16 by hshawand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,11 @@ int		ft_printf(const char *format, ...);
 int		ft_printf_struct(const char *format, ...);
 char	*ft_struct_fill(char *flag_start, va_list args);
 void	ft_struct_process(t_format *c_format, va_list args);
+void	ft_itoa64(int64_t d, char *str);
 
 void	ft_print_s(t_format *c_format, char *str);
 void	ft_print_c(t_format *c_format, char c);
 void	ft_print_p(t_format *c_format, void *ptr);
+void	ft_print_d(t_format *c_format, int64_t d);
 
 #endif

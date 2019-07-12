@@ -8,7 +8,10 @@ int		main()
 
 	int a = 10;
 //	ft_printf("%p, %o, %x, %X\n", &a, a, a, a);
-	printf("%-.10d\n", a);
+	printf("%11.10d\n", a);
+	printf("%11.10d\n", a);
+	printf("%11.10d\n", a);
+	
 
 	return (0);
 }

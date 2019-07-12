@@ -3,21 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lltoa.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svivienn <svivienn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hshawand <hshawand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 15:47:23 by svivienn          #+#    #+#             */
-/*   Updated: 2019/07/11 16:44:28 by svivienn         ###   ########.fr       */
+/*   Updated: 2019/07/12 13:29:06 by hshawand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdint.h>
 #include <stdlib.h>
 
-char *ft_itoa64(int64_t c)
+void	ft_itoa64(int64_t c, char *str)
 {
     int     size;
     int64_t save;
-    char    *str;
     
     size = 0;
     save = c;
@@ -28,7 +27,6 @@ char *ft_itoa64(int64_t c)
     }
     if (c < 0)
         size++;
-    str = (char*)malloc(sizeof(char) *  (size + 1));
     str[size] = '\0';
     if (c < 0)
         str[0] = '-';
@@ -38,9 +36,9 @@ char *ft_itoa64(int64_t c)
         size--;
         c = c / 10;
     }
-    return (str);
 }
 
+/*
 char *ft_itoa64(uint64_t c)
 {
     int     size;
@@ -64,3 +62,4 @@ char *ft_itoa64(uint64_t c)
     }
     return (str);
 }
+*/
