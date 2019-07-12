@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   diouxX.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hshawand <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hshawand <hshawand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 15:09:05 by hshawand          #+#    #+#             */
-/*   Updated: 2019/07/12 13:11:19 by hshawand         ###   ########.fr       */
+/*   Updated: 2019/07/12 14:32:31 by hshawand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,11 @@
 
 /* Also call ft_print_d for %i */
 /* We also need ft_int64_uitoa */
+/* NEGATIVE VALUE ACHTUNG! -0010 VS 00-10! ALSO ADD flag, that change minus to smth */
 
 void	ft_print_d(t_format *c_format, int64_t d)
 {
-	char	output[20];
+	char	output[21];
 
 	if (c_format->length == 5)
 		/* just ft_int64_itoa */
