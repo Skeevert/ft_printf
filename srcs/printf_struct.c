@@ -6,7 +6,7 @@
 /*   By: hshawand <hshawand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 13:42:41 by hshawand          #+#    #+#             */
-/*   Updated: 2019/07/12 14:21:42 by hshawand         ###   ########.fr       */
+/*   Updated: 2019/07/12 15:58:33 by hshawand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,15 @@ void	ft_struct_process(t_format *c_format, va_list args)
 		ft_print_p(c_format, va_arg(args, void *));
 	else if (c_format->type == 'd' || c_format->type == 'i')
 		ft_print_d(c_format, va_arg(args, int64_t));
+	else if (c_format->type == 'o')
+		ft_print_oxX(c_format, va_arg(args, uint64_t), 8, 0);
+	else if (c_format->type == 'o')
+		ft_print_oxX(c_format, va_arg(args, uint64_t), 8, 0);
+	else if (c_format->type == 'x')
+		ft_print_oxX(c_format, va_arg(args, uint64_t), 16, 0);
+	else if (c_format->type == 'X')
+		ft_print_oxX(c_format, va_arg(args, uint64_t), 16, 1);
+	
 }
 
 int		ft_printf_struct(const char *format, ...)
