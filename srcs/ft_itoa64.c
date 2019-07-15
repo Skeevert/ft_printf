@@ -6,7 +6,7 @@
 /*   By: hshawand <hshawand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 15:47:23 by svivienn          #+#    #+#             */
-/*   Updated: 2019/07/15 13:59:03 by hshawand         ###   ########.fr       */
+/*   Updated: 2019/07/15 14:09:01 by hshawand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void    ft_utoa64(uint64_t c, char *str)
 
     size = 0;
     u_save = c;
-    while (c != 10 != 0 && size++)
+    while (c != 0 && size++)
         c /= 10;
     str[size] = '\0';
     while (u_save != 0)
