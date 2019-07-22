@@ -43,6 +43,7 @@ srcs/libft/ft_memalloc.o \
 srcs/libft/ft_memdel.o \
 srcs/libft/ft_putchar_fd.o \
 srcs/libft/ft_putchar.o \
+srcs/libft/ft_putnchar.o \
 srcs/libft/ft_putendl_fd.o \
 srcs/libft/ft_putendl.o \
 srcs/libft/ft_putnbr.o \

@@ -17,7 +17,7 @@ int		main(void)
 {
 	int a = 256;
 //	ft_printf("%p, %o, %x, %X\n", &a, a, a, a);
-	printf("%#030x PRINTF\n", a);
-	ft_printf_struct("%#030x MY_PRINTF\n", a);
+	printf("%#30c PRINTF\n", 'E');
+	ft_printf_struct("%#30c MY_PRINTF\n", 'E');
 	return (0);
 }

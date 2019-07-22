@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "main.h"
-
+/*
 void	ft_print_c(t_format *c_format, char c)
 {
 	char	to_print[STACKSIZE];
@@ -35,7 +35,25 @@ void	ft_print_c(t_format *c_format, char c)
 	else
 		write(1, &c, 1);
 }
+*/
 
+void	ft_print_c(t_format *c_format, char c)
+{
+	char filler;
+
+	c_format->flag & 0x08 ? (filler = '0') : (filler = ' ');
+	if (c_format->flag & 0x04)
+	{
+		write(1, &c, 1);
+		c_format->width > 1 ? ft_putnchar(filler, c_format->width - 1) : 0;
+	}
+	else
+	{
+		c_format->width > 1 ? ft_putnchar(' ', c_format->width - 1) : 0;
+		write(1, &c, 1);
+	}
+}
+/*
 void	ft_print_s(t_format *c_format, char *str)
 {
 	char	to_print[STACKSIZE];
@@ -62,6 +80,26 @@ void	ft_print_s(t_format *c_format, char *str)
 	}
 	else
 		ft_putstr(str);
+}
+*/
+
+void	ft_print_s(t_format *c_format, char *str)
+{
+	char			filler;
+	unsigned int	len;
+
+	c_format->flag & 0x08 ? (filler = '0') : (filler = ' ');
+	len = ft_strlen(str);
+	if (c_format->flag & 0x04)
+	{
+		write(1, str, len);
+		c_format->width > len ? ft_putnchar(filler, c_format->width - len) : 0;
+	}
+	else
+	{
+		c_format->width > len ? ft_putnchar(' ', c_format->width - len) : 0;
+		write(1, str, len);
+	}
 }
 
 void	ft_print_p(t_format *c_format, void *ptr)
