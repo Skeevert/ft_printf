@@ -8,8 +8,7 @@ int		main()
 
 	int a = 12;
 //	ft_printf("%p, %o, %x, %X\n", &a, a, a, a);
-	printf("%lu INT_64\n", sizeof(uint64_t));
-	printf("%lu PTR_64\n", sizeof(uintptr_t));
+	printf("%#-30.12x\n", a);
 	
 
 	return (0);

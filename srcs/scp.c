@@ -93,11 +93,11 @@ void	ft_print_s(t_format *c_format, char *str)
 	if (c_format->flag & 0x04)
 	{
 		write(1, str, len);
-		c_format->width > len ? ft_putnchar(filler, c_format->width - len) : 0;
+		c_format->width > len ? ft_putnchar(' ', c_format->width - len) : 0;
 	}
 	else
 	{
-		c_format->width > len ? ft_putnchar(' ', c_format->width - len) : 0;
+		c_format->width > len ? ft_putnchar(filler, c_format->width - len) : 0;
 		write(1, str, len);
 	}
 }

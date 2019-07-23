@@ -33,7 +33,7 @@ static char		*ft_flag_catch(char *flag, t_format *c_format)
 	return (flag);
 }
 
-static char		*ft_width_presicion_catch(char *flag, t_format *c_format)
+static char		*ft_width_prec_catch(char *flag, t_format *c_format)
 {
 	if ((c_format->width = ft_atoi(flag)))
 	{
@@ -43,7 +43,7 @@ static char		*ft_width_presicion_catch(char *flag, t_format *c_format)
 	if (*flag == '.')
 	{
 		flag++;
-		c_format->precision = ft_atoi(flag);
+		c_format->prec = ft_atoi(flag);
 		while (*flag >= '0' && *flag <= '9')
 			flag++;
 	}
@@ -120,7 +120,7 @@ char			*ft_struct_fill(char *flag_start, va_list args)
 		return (flag + 1);
 	}
 	flag = ft_flag_catch(flag, &c_format);
-	flag = ft_width_presicion_catch(flag, &c_format);
+	flag = ft_width_prec_catch(flag, &c_format);
 	flag = ft_length_catch(flag, &c_format);
 	flag = ft_type_catch(flag, &c_format);
 	ft_struct_process(&c_format, args);

@@ -26,7 +26,7 @@ typedef struct		s_format
 {
 	char			flag;
 	unsigned int	width;
-	unsigned int	precision;
+	unsigned int	prec;
 	char			length;
 	char			type;
 }					t_format;
