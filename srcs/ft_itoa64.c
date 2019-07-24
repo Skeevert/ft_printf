@@ -20,13 +20,11 @@ void	ft_itoa64(int64_t c, char *str)
 
     size = 0;
     c < 0 ? (u_save = -c) : (u_save = c);
-    if (c < 0)
-    {
-        size++;
-        str[0] = '-';
-    }
-	while (c != 0 && size++)
+	while (c != 0)
+	{
 		c /= 10;
+		size++;
+	}
     str[size] = '\0';
     while (u_save != 0)
     {

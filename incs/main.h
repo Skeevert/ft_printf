@@ -43,6 +43,6 @@ void	ft_print_s(t_format *c_format, char *str);
 void	ft_print_c(t_format *c_format, char c);
 void	ft_print_p(t_format *c_format, void *ptr);
 void	ft_print_d(t_format *c_format, int64_t d);
-void	ft_print_oxX(t_format *c_format, uint64_t d, char base, char mode);
+void	ft_print_ouxX(t_format *c_format, uint64_t d, char base, char mode);
 
 #endif

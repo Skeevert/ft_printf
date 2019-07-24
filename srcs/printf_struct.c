@@ -38,13 +38,13 @@ void	ft_struct_process(t_format *c_format, va_list args)
 	else if (c_format->type == 'd' || c_format->type == 'i')
 		ft_print_d(c_format, va_arg(args, int64_t));
 	else if (c_format->type == 'o')
-		ft_print_oxX(c_format, va_arg(args, uint64_t), 8, 0);
-	else if (c_format->type == 'o')
-		ft_print_oxX(c_format, va_arg(args, uint64_t), 8, 0);
+		ft_print_ouxX(c_format, va_arg(args, uint64_t), 8, 0);
+	else if (c_format->type == 'u')
+		ft_print_ouxX(c_format, va_arg(args, uint64_t), 10, 0);
 	else if (c_format->type == 'x')
-		ft_print_oxX(c_format, va_arg(args, uint64_t), 16, 0);
+		ft_print_ouxX(c_format, va_arg(args, uint64_t), 16, 0);
 	else if (c_format->type == 'X')
-		ft_print_oxX(c_format, va_arg(args, uint64_t), 16, 1);
+		ft_print_ouxX(c_format, va_arg(args, uint64_t), 16, 1);
 	
 }
 

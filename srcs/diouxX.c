@@ -15,10 +15,36 @@
 /* Also call ft_print_d for %i */
 /* We also need ft_int64_uitoa */
 /* NEGATIVE VALUE ACHTUNG! -0010 VS 00-10! ALSO ADD flag, that change minus to smth */
-void	ft_preformat_0(t_format *c_format, char base, char mode, char *str) /* WORKS ONLY WITH 0*/
+void	ft_preformat_di(t_format *c_format, size_t len, int64_t d, char *str)
+{
+	char	to_add;
+
+	d < 0 ? (to_add = '-') : (to_add = 0);
+	d >= 0 && c_format->flag & 0x02 ? (to_add = '+') : 0;
+	d >= 0 && c_format->flag & 0x01 & ~0x02 ? (to_add = ' ') : 0;
+	if (c_format->flag & 0x04)
+	{
+		write(1, &to_add, 1);
+		c_format->prec ? ft_putnchar('0', c_format->prec - ft_strlen(str)) : 0;
+		ft_putstr(str);
+		c_format->width > len ? ft_putnchar(' ', c_format->width - len) : 0;
+	}
+	else
+	{
+		!(c_format->flag & 0x08)  && c_format->width > len ? 
+			ft_putnchar(' ', c_format->width - len) : 0;
+		write(1, &to_add, 1);
+		c_format-> flag & 0x08 && c_format->width > len ?
+			ft_putnchar('0', c_format->width - len) : 0;
+		c_format->prec ? ft_putnchar('0', c_format->prec - ft_strlen(str)) : 0;
+		ft_putstr(str);
+	}
+}
+
+void	ft_preformat_ouxX(t_format *c_format, char base, char mode, char *str)
 {
 	char			to_add[3];
-	unsigned int	len;
+	size_t			len;
 
 	base == 8 ? (int)(ft_strcpy(to_add, "0")) : (to_add[0] = 0);
 	base == 16 && mode == 0 ? (ft_strcpy(to_add, "0x")) : 0;
@@ -46,7 +72,8 @@ void	ft_preformat_0(t_format *c_format, char base, char mode, char *str) /* WORK
 
 void	ft_print_d(t_format *c_format, int64_t d)
 {
-	char	output[21];
+	char			output[21];
+	size_t			len;
 
 	if (c_format->length == 5)
 		ft_itoa64(d, output);
@@ -60,12 +87,19 @@ void	ft_print_d(t_format *c_format, int64_t d)
 		ft_itoa64((char)d, output);
 	else if (c_format->length == 0)
 		ft_itoa64((int)d, output);
-	ft_print_s(c_format, output);
+	len = ft_strlen(output);
+	c_format->prec ? (c_format->flag &= ~0x08) : 0;
+	(d < 0) || (c_format->flag & 0x03) ? (len++) : 0;
+	c_format->width = c_format->width < c_format->prec - len ?
+		(c_format->prec - len) : c_format->width;
+	c_format->prec > len ? (c_format->width -= (c_format->prec - len)) :
+		(c_format->prec = 0);
+	ft_preformat_di(c_format, len, d, output);
 }
-
+	
 /* TODO: add '#' flag process: '0' for %o, '0x' for %x, 0X for %X */
 
-void	ft_print_oxX(t_format *c_format, uint64_t d, char base, char mode)
+void	ft_print_ouxX(t_format *c_format, uint64_t d, char base, char mode)
 {
 	char			output[23];
 	unsigned int	len;	
@@ -84,9 +118,9 @@ void	ft_print_oxX(t_format *c_format, uint64_t d, char base, char mode)
 		ft_utoa64_base((unsigned int)d, output, base, mode);
 	len = ft_strlen(output);
 	c_format->prec ? (c_format->flag &= ~0x08) : 0;
-	c_format->width < (c_format->prec - len) ?
-		(c_format->width = c_format->prec - len) : 0;
+	c_format->width = c_format->width < (c_format->prec - len) ?
+		(c_format->prec - len) : c_format->width;
 	c_format->prec > len ? (c_format->width -= (c_format->prec - len)) :
 		(c_format->prec = 0);
-	ft_preformat_0(c_format, base, mode, output);
+	ft_preformat_ouxX(c_format, base, mode, output);
 }
