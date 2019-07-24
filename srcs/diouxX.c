@@ -22,6 +22,7 @@ void	ft_preformat_di(t_format *c_format, size_t len, int64_t d, char *str)
 	d < 0 ? (to_add = '-') : (to_add = 0);
 	d >= 0 && c_format->flag & 0x02 ? (to_add = '+') : 0;
 	d >= 0 && c_format->flag & 0x01 & ~0x02 ? (to_add = ' ') : 0;
+	to_add && c_format->width ? (c_format->width--) : 0;
 	if (c_format->flag & 0x04)
 	{
 		write(1, &to_add, 1);
