@@ -84,6 +84,8 @@ void	ft_print_oxX(t_format *c_format, uint64_t d, char base, char mode)
 		ft_utoa64_base((unsigned int)d, output, base, mode);
 	len = ft_strlen(output);
 	c_format->prec ? (c_format->flag &= ~0x08) : 0;
+	c_format->width < (c_format->prec - len) ?
+		(c_format->width = c_format->prec - len) : 0;
 	c_format->prec > len ? (c_format->width -= (c_format->prec - len)) :
 		(c_format->prec = 0);
 	ft_preformat_0(c_format, base, mode, output);
