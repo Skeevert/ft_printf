@@ -6,7 +6,7 @@
 /*   By: hshawand <hshawand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 13:42:41 by hshawand          #+#    #+#             */
-/*   Updated: 2019/07/12 15:58:33 by hshawand         ###   ########.fr       */
+/*   Updated: 2019/08/12 13:41:14 by hshawand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,5 +63,6 @@ int		ft_printf_struct(const char *format, ...)
 			format++;
 		}
 	}
+	va_end(args);
 	return (0);
 }

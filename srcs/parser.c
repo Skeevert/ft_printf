@@ -6,7 +6,7 @@
 /*   By: hshawand <hshawand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/24 13:45:33 by hshawand          #+#    #+#             */
-/*   Updated: 2019/06/27 12:07:10 by hshawand         ###   ########.fr       */
+/*   Updated: 2019/08/12 14:23:11 by hshawand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ static char		*ft_width_prec_catch(char *flag, t_format *c_format)
 	if (*flag == '.')
 	{
 		flag++;
+		c_format->prec_set |= 1;
 		c_format->prec = ft_atoi(flag);
 		while (*flag >= '0' && *flag <= '9')
 			flag++;

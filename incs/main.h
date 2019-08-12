@@ -6,7 +6,7 @@
 /*   By: hshawand <hshawand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/19 12:42:35 by hshawand          #+#    #+#             */
-/*   Updated: 2019/07/12 15:58:35 by hshawand         ###   ########.fr       */
+/*   Updated: 2019/08/12 14:30:43 by hshawand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdint.h> // uintptr_t
-# define STACKSIZE 12000
 
 typedef struct		s_format
 {
-	char			flag;
+	char			flag : 5;
 	unsigned int	width;
 	unsigned int	prec;
+	char			prec_set : 1;
 	char			length;
 	char			type;
 }					t_format;
