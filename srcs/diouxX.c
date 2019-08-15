@@ -6,36 +6,36 @@
 /*   By: hshawand <hshawand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 15:09:05 by hshawand          #+#    #+#             */
-/*   Updated: 2019/08/12 15:37:49 by hshawand         ###   ########.fr       */
+/*   Updated: 2019/08/15 16:02:46 by hshawand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 
-void	ft_preformat_di(t_format *c_format, size_t len, int64_t d, char *str)
+void	ft_preformat_di(t_format *c_fmt, size_t len, char *str)
 {
 	char	to_add;
 
-	d < 0 ? (to_add = '-') : (to_add = 0);
-	d >= 0 && c_format->flag & 0x02 ? (to_add = '+') : 0;
-	d >= 0 && c_format->flag & 0x01 & ~0x02 ? (to_add = ' ') : 0;
-	to_add && c_format->width ? (c_format->width--) : 0;
-	if (c_format->flag & 0x04)
+	c_fmt->sign ? (to_add = '-') : (to_add = 0);
+	!(c_fmt->sign) && c_fmt->flag & 0x02 ? (to_add = '+') : 0;
+	!(c_fmt->sign) && c_fmt->flag & 0x01 & ~0x02 ? (to_add = ' ') : 0;
+	to_add && c_fmt->width ? (c_fmt->width--) : 0;
+	if (c_fmt->flag & 0x04)
 	{
 		gwrite(1, &to_add, 1);
-		c_format->prec ? ft_putnchar('0', c_format->prec - ft_strlen(str)) : 0;
-		ft_putstr(str);
-		c_format->width > len ? ft_putnchar(' ', c_format->width - len) : 0;
+		c_fmt->prec ? ft_putnchar('0', c_fmt->prec - ft_strlen(str)) : 0;
+		gwrite(1, str, ft_strlen(str)); // ft_putstr(str);
+		c_fmt->width > len ? ft_putnchar(' ', c_fmt->width - len) : 0;
 	}
 	else
 	{
-		!(c_format->flag & 0x08)  && c_format->width > len ? 
-			ft_putnchar(' ', c_format->width - len) : 0;
+		!(c_fmt->flag & 0x08)  && c_fmt->width > len ? 
+			ft_putnchar(' ', c_fmt->width - len) : 0;
 		gwrite(1, &to_add, 1);
-		c_format-> flag & 0x08 && c_format->width > len ?
-			ft_putnchar('0', c_format->width - len) : 0;
-		c_format->prec ? ft_putnchar('0', c_format->prec - ft_strlen(str)) : 0;
-		ft_putstr(str);
+		c_fmt-> flag & 0x08 && c_fmt->width > len ?
+			ft_putnchar('0', c_fmt->width - len) : 0;
+		c_fmt->prec ? ft_putnchar('0', c_fmt->prec - ft_strlen(str)) : 0;
+		gwrite(1, str, ft_strlen(str)); // ft_putstr(str);
 	}
 }
 
@@ -68,55 +68,55 @@ void	ft_preformat_ouxX(t_format *c_format, char base, char mode, char *str)
 	}
 }
 
-void	ft_print_d(t_format *c_format, int64_t d)
+void	ft_print_d(t_format *c_fmt, int64_t d)
 {
 	char			output[21];
 	size_t			len;
 
-	if (c_format->length == 5)
-		ft_itoa64(d, output);
-	else if (c_format->length == 4)
-		ft_itoa64((long long)d, output);
-	else if (c_format->length == 3)
-		ft_itoa64((long)d, output);
-	else if (c_format->length == 2)
-		ft_itoa64((short)d, output);
-	else if (c_format->length == 1)
-		ft_itoa64((char)d, output);
-	else if (c_format->length == 0)
-		ft_itoa64((int)d, output);
+	if (c_fmt->length == 5)
+		ft_itoa64(d, output, c_fmt);
+	else if (c_fmt->length == 4)
+		ft_itoa64((long long)d, output, c_fmt);
+	else if (c_fmt->length == 3)
+		ft_itoa64((long)d, output, c_fmt);
+	else if (c_fmt->length == 2)
+		ft_itoa64((short)d, output, c_fmt);
+	else if (c_fmt->length == 1)
+		ft_itoa64((char)d, output, c_fmt);
+	else if (c_fmt->length == 0)
+		ft_itoa64((int)d, output, c_fmt);
 	len = ft_strlen(output);
-	c_format->prec ? (c_format->flag &= ~0x08) : 0;
-	(d < 0) || (c_format->flag & 0x03) ? (len++) : 0;
-	c_format->width = c_format->width < c_format->prec - len ?
-		(c_format->prec - len) : c_format->width;
-	c_format->prec > len ? (c_format->width -= (c_format->prec - len)) :
-		(c_format->prec = 0);
-	ft_preformat_di(c_format, len, d, output);
+	c_fmt->prec ? (c_fmt->flag &= ~0x08) : 0;
+	c_fmt->sign || (c_fmt->flag & 0x03) ? (len++) : 0;
+	c_fmt->prec = c_fmt->prec > len ? c_fmt->prec - len : 0;
+	c_fmt->width = c_fmt->width < c_fmt->prec ? 
+		c_fmt->prec : c_fmt->width;
+	c_fmt->prec ? c_fmt->width -= c_fmt->prec : 0;
+	ft_preformat_di(c_fmt, len, output);
 }
 
-void	ft_print_ouxX(t_format *c_format, uint64_t d, char base, char mode)
+void	ft_print_ouxX(t_format *c_fmt, uint64_t d, char base, char mode)
 {
 	char			output[23];
 	unsigned int	len;	
 
-	if (c_format->length == 5)
+	if (c_fmt->length == 5)
 		ft_utoa64_base(d, output, base, mode);
-	else if (c_format->length == 4)
+	else if (c_fmt->length == 4)
 		ft_utoa64_base((unsigned long long)d, output, base, mode);
-	else if (c_format->length == 3)
+	else if (c_fmt->length == 3)
 		ft_utoa64_base((unsigned long)d, output, base, mode);
-	else if (c_format->length == 2)
+	else if (c_fmt->length == 2)
 		ft_utoa64_base((unsigned short)d, output, base, mode);
-	else if (c_format->length == 1)
+	else if (c_fmt->length == 1)
 		ft_utoa64_base((unsigned char)d, output, base, mode);
-	else if (c_format->length == 0)
+	else if (c_fmt->length == 0)
 		ft_utoa64_base((unsigned int)d, output, base, mode);
 	len = ft_strlen(output);
-	c_format->prec ? (c_format->flag &= ~0x08) : 0;
-	c_format->width = c_format->width < (c_format->prec - len) ?
-		(c_format->prec - len) : c_format->width;
-	c_format->prec > len ? (c_format->width -= (c_format->prec - len)) :
-		(c_format->prec = 0);
-	ft_preformat_ouxX(c_format, base, mode, output);
+	c_fmt->prec ? (c_fmt->flag &= ~0x08) : 0;
+	c_fmt->prec = c_fmt->prec > len ? c_fmt->prec - len : 0;
+	c_fmt->width = c_fmt->width < c_fmt->prec ?
+		c_fmt->prec : c_fmt->width;
+	c_fmt->prec > len ? c_fmt->width -= c_fmt->prec : 0;
+	ft_preformat_ouxX(c_fmt, base, mode, output);
 }

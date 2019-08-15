@@ -6,25 +6,28 @@
 /*   By: hshawand <hshawand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 15:47:23 by svivienn          #+#    #+#             */
-/*   Updated: 2019/07/15 14:09:01 by hshawand         ###   ########.fr       */
+/*   Updated: 2019/08/15 15:56:00 by hshawand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "main.h"
 #include <stdint.h>
 #include <stdlib.h>
 
-void	ft_itoa64(int64_t c, char *str)
+void	ft_itoa64(int64_t c, char *str, t_format *c_fmt)
 {
     int         size;
     uint64_t    u_save;
 
-    size = 0;
+    size = 1;
     c < 0 ? (u_save = -c) : (u_save = c);
-	while (c != 0)
+	c_fmt->sign = c < 0 ? 1 : 0;
+	while (c > 1)
 	{
 		c /= 10;
 		size++;
 	}
+	str[0] = '0';
     str[size] = '\0';
     while (u_save != 0)
     {

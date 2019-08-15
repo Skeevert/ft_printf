@@ -6,26 +6,26 @@
 /*   By: hshawand <hshawand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/24 13:45:33 by hshawand          #+#    #+#             */
-/*   Updated: 2019/08/12 14:23:11 by hshawand         ###   ########.fr       */
+/*   Updated: 2019/08/15 14:23:51 by hshawand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 
-static char		*ft_flag_catch(char *flag, t_format *c_format)
+static char		*ft_flag_catch(char *flag, t_format *c_fmt)
 {
 	while (*flag)
 	{
 		if (*flag == ' ')
-			c_format->flag |= 0x01;
+			c_fmt->flag |= 0x01;
 		else if (*flag == '+')
-			c_format->flag |= 0x02;
+			c_fmt->flag |= 0x02;
 		else if (*flag == '-')
-			c_format->flag |= 0x04;
+			c_fmt->flag |= 0x04;
 		else if (*flag == '0')
-			c_format->flag |= 0x08;
+			c_fmt->flag |= 0x08;
 		else if (*flag == '#')
-			c_format->flag |= 0x10;
+			c_fmt->flag |= 0x10;
 		else
 			return (flag);
 		flag++;
@@ -33,9 +33,9 @@ static char		*ft_flag_catch(char *flag, t_format *c_format)
 	return (flag);
 }
 
-static char		*ft_width_prec_catch(char *flag, t_format *c_format)
+static char		*ft_width_prec_catch(char *flag, t_format *c_fmt)
 {
-	if ((c_format->width = ft_atoi(flag)))
+	if ((c_fmt->width = ft_atoi(flag)))
 	{
 		while (*flag >= '0' && *flag <= '9')
 			flag++;
@@ -43,15 +43,15 @@ static char		*ft_width_prec_catch(char *flag, t_format *c_format)
 	if (*flag == '.')
 	{
 		flag++;
-		c_format->prec_set |= 1;
-		c_format->prec = ft_atoi(flag);
+		c_fmt->prec_set |= 1;
+		c_fmt->prec = ft_atoi(flag);
 		while (*flag >= '0' && *flag <= '9')
 			flag++;
 	}
 	return (flag);
 }
 
-static char		*ft_length_catch(char *flag, t_format *c_format)
+static char		*ft_length_catch(char *flag, t_format *c_fmt)
 {
 	int		tmp;
 
@@ -72,36 +72,36 @@ static char		*ft_length_catch(char *flag, t_format *c_format)
 			flag += 2;
 		else
 			flag++;
-		if (tmp > c_format->length)
-			c_format->length = tmp;
+		if (tmp > c_fmt->length)
+			c_fmt->length = tmp;
 	}
 	return (flag);
 }
 
-static char		*ft_type_catch(char *flag, t_format *c_format)
+static char		*ft_type_catch(char *flag, t_format *c_fmt)
 {
-	while (!c_format->type && *flag)
+	while (!c_fmt->type && *flag)
 	{
 		if (*flag == 'c')
-			c_format->type = 'c';
+			c_fmt->type = 'c';
 		else if (*flag == 's')
-			c_format->type = 's';
+			c_fmt->type = 's';
 		else if (*flag == 'p')
-			c_format->type = 'p';
+			c_fmt->type = 'p';
 		else if (*flag == 'd')
-			c_format->type = 'd';
+			c_fmt->type = 'd';
 		else if (*flag == 'i')
-			c_format->type = 'i';
+			c_fmt->type = 'i';
 		else if (*flag == 'o')
-			c_format->type = 'o';
+			c_fmt->type = 'o';
 		else if (*flag == 'u')
-			c_format->type = 'u';
+			c_fmt->type = 'u';
 		else if (*flag == 'x')
-			c_format->type = 'x';
+			c_fmt->type = 'x';
 		else if (*flag == 'X')
-			c_format->type = 'X';
+			c_fmt->type = 'X';
 		else if (*flag == 'f')
-			c_format->type = 'f';
+			c_fmt->type = 'f';
 		flag++;
 	}
 	return (flag);
@@ -109,10 +109,10 @@ static char		*ft_type_catch(char *flag, t_format *c_format)
 
 char			*ft_struct_fill(char *flag_start, va_list args)
 {
-	t_format	c_format;
+	t_format	c_fmt;
 	char		*flag;
 
-	ft_bzero(&c_format, sizeof(c_format));
+	ft_bzero(&c_fmt, sizeof(c_fmt));
 	flag = flag_start;
 	flag++;
 	if (*flag == '%')
@@ -120,10 +120,10 @@ char			*ft_struct_fill(char *flag_start, va_list args)
 		write(1, "%", 1);
 		return (flag + 1);
 	}
-	flag = ft_flag_catch(flag, &c_format);
-	flag = ft_width_prec_catch(flag, &c_format);
-	flag = ft_length_catch(flag, &c_format);
-	flag = ft_type_catch(flag, &c_format);
-	ft_struct_process(&c_format, args);
+	flag = ft_flag_catch(flag, &c_fmt);
+	flag = ft_width_prec_catch(flag, &c_fmt);
+	flag = ft_length_catch(flag, &c_fmt);
+	flag = ft_type_catch(flag, &c_fmt);
+	ft_struct_process(&c_fmt, args);
 	return (flag);
 }

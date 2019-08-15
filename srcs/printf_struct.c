@@ -6,11 +6,12 @@
 /*   By: hshawand <hshawand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 13:42:41 by hshawand          #+#    #+#             */
-/*   Updated: 2019/08/12 15:53:35 by hshawand         ###   ########.fr       */
+/*   Updated: 2019/08/15 13:39:41 by hshawand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
+#include <stdio.h>
 
 /*
  * # 0 - + and space
@@ -30,7 +31,7 @@
 void	ft_putnchar(char c, unsigned int n)
 {
 	g_output_size += n;
-	while (n--, 0)
+	while (n-- > 0)
 		write(1, &c, 1);
 }
 
