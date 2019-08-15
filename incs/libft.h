@@ -6,7 +6,7 @@
 /*   By: hshawand <hshawand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 10:09:48 by hshawand          #+#    #+#             */
-/*   Updated: 2019/04/12 16:20:56 by hshawand         ###   ########.fr       */
+/*   Updated: 2019/08/12 15:52:36 by hshawand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ void				ft_putchar_fd(char c, int fd);
 void				ft_putstr_fd(char const *s, int fd);
 void				ft_putendl_fd(char const *s, int fd);
 void				ft_putnbr_fd(int n, int fd);
-void				ft_putnchar(char c, unsigned int n);
 
 typedef struct		s_list
 {

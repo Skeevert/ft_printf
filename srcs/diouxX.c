@@ -6,15 +6,12 @@
 /*   By: hshawand <hshawand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 15:09:05 by hshawand          #+#    #+#             */
-/*   Updated: 2019/07/12 16:04:44 by hshawand         ###   ########.fr       */
+/*   Updated: 2019/08/12 15:37:49 by hshawand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 
-/* Also call ft_print_d for %i */
-/* We also need ft_int64_uitoa */
-/* NEGATIVE VALUE ACHTUNG! -0010 VS 00-10! ALSO ADD flag, that change minus to smth */
 void	ft_preformat_di(t_format *c_format, size_t len, int64_t d, char *str)
 {
 	char	to_add;
@@ -25,7 +22,7 @@ void	ft_preformat_di(t_format *c_format, size_t len, int64_t d, char *str)
 	to_add && c_format->width ? (c_format->width--) : 0;
 	if (c_format->flag & 0x04)
 	{
-		write(1, &to_add, 1);
+		gwrite(1, &to_add, 1);
 		c_format->prec ? ft_putnchar('0', c_format->prec - ft_strlen(str)) : 0;
 		ft_putstr(str);
 		c_format->width > len ? ft_putnchar(' ', c_format->width - len) : 0;
@@ -34,7 +31,7 @@ void	ft_preformat_di(t_format *c_format, size_t len, int64_t d, char *str)
 	{
 		!(c_format->flag & 0x08)  && c_format->width > len ? 
 			ft_putnchar(' ', c_format->width - len) : 0;
-		write(1, &to_add, 1);
+		gwrite(1, &to_add, 1);
 		c_format-> flag & 0x08 && c_format->width > len ?
 			ft_putnchar('0', c_format->width - len) : 0;
 		c_format->prec ? ft_putnchar('0', c_format->prec - ft_strlen(str)) : 0;
@@ -56,7 +53,7 @@ void	ft_preformat_ouxX(t_format *c_format, char base, char mode, char *str)
 	{
 		c_format->flag & 0x10 ? ft_putstr(to_add) : 0;
 		c_format->prec ? ft_putnchar('0', c_format->prec - ft_strlen(str)) : 0;
-		ft_putstr(str);
+		gwrite(1, str, ft_strlen(str));
 		c_format->width > len ? ft_putnchar(' ', c_format->width - len) : 0;
 	}
 	else
@@ -67,7 +64,7 @@ void	ft_preformat_ouxX(t_format *c_format, char base, char mode, char *str)
 		c_format-> flag & 0x08 && c_format->width > len ?
 			ft_putnchar('0', c_format->width - len) : 0;
 		c_format->prec ? ft_putnchar('0', c_format->prec - ft_strlen(str)) : 0;
-		ft_putstr(str);
+		gwrite(1, str, ft_strlen(str));
 	}
 }
 
@@ -97,8 +94,6 @@ void	ft_print_d(t_format *c_format, int64_t d)
 		(c_format->prec = 0);
 	ft_preformat_di(c_format, len, d, output);
 }
-	
-/* TODO: add '#' flag process: '0' for %o, '0x' for %x, 0X for %X */
 
 void	ft_print_ouxX(t_format *c_format, uint64_t d, char base, char mode)
 {

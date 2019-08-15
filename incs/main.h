@@ -6,7 +6,7 @@
 /*   By: hshawand <hshawand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/19 12:42:35 by hshawand          #+#    #+#             */
-/*   Updated: 2019/08/12 14:30:43 by hshawand         ###   ########.fr       */
+/*   Updated: 2019/08/12 15:54:02 by hshawand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,12 @@ typedef struct		s_format
 	char			type;
 }					t_format;
 
-int		ft_printf(const char *format, ...);
+size_t				g_output_size;
+
+
 int		ft_printf_struct(const char *format, ...);
+void	gwrite(int stream, const char *str, size_t size);
+void	ft_putnchar(char c, unsigned int n);
 char	*ft_struct_fill(char *flag_start, va_list args);
 void	ft_struct_process(t_format *c_format, va_list args);
 void	ft_itoa64(int64_t d, char *str);

@@ -6,7 +6,7 @@
 #    By: hshawand <hshawand@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/04 16:37:05 by hshawand          #+#    #+#              #
-#    Updated: 2019/07/12 15:20:00 by hshawand         ###   ########.fr        #
+#    Updated: 2019/08/12 15:51:33 by hshawand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,6 @@ srcs/libft/ft_memalloc.o \
 srcs/libft/ft_memdel.o \
 srcs/libft/ft_putchar_fd.o \
 srcs/libft/ft_putchar.o \
-srcs/libft/ft_putnchar.o \
 srcs/libft/ft_putendl_fd.o \
 srcs/libft/ft_putendl.o \
 srcs/libft/ft_putnbr.o \

@@ -6,7 +6,7 @@
 /*   By: hshawand <hshawand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 13:42:41 by hshawand          #+#    #+#             */
-/*   Updated: 2019/08/12 13:41:14 by hshawand         ###   ########.fr       */
+/*   Updated: 2019/08/12 15:53:35 by hshawand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,18 @@
   * f with the following flags: l and L
   * %%
   */
+
+void	ft_putnchar(char c, unsigned int n)
+{
+	g_output_size += n;
+	while (n--, 0)
+		write(1, &c, 1);
+}
+
+void	gwrite(int stream, const char *str, size_t size)
+{
+	g_output_size += write(stream, str, size);
+}
 
 void	ft_struct_process(t_format *c_format, va_list args)
 {
@@ -53,16 +65,17 @@ int		ft_printf_struct(const char *format, ...)
 	va_list		args;
 
 	va_start(args, format);
+	g_output_size = 0;
 	while (*format)
 	{
 		if (*format == '%')
 			format = ft_struct_fill((char *)format, args);
 		else
 		{
-			write(1, format, 1);
+			gwrite(1, format, 1);
 			format++;
 		}
 	}
 	va_end(args);
-	return (0);
+	return (g_output_size);
 }
