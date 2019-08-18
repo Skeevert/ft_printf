@@ -22,13 +22,14 @@ void	ft_itoa64(int64_t c, char *str, t_format *c_fmt)
     size = 1;
     c < 0 ? (u_save = -c) : (u_save = c);
 	c_fmt->sign = c < 0 ? 1 : 0;
-	while (c > 1)
+	while (u_save > 1)
 	{
-		c /= 10;
+		u_save /= 10;
 		size++;
 	}
 	str[0] = '0';
     str[size] = '\0';
+	c < 0 ? (u_save = -c) : (u_save = c);
     while (u_save != 0)
     {
         str[size - 1] = (u_save % 10) + '0';
@@ -42,10 +43,14 @@ void    ft_utoa64(uint64_t c, char *str)
     int         size;
     uint64_t    u_save;
 
-    size = 0;
+    size = 1;
     u_save = c;
-    while (c != 0 && size++)
+    while (c > 1)
+	{
         c /= 10;
+		size++;
+	}
+	str[0] = '0';
     str[size] = '\0';
     while (u_save != 0)
     {

@@ -19,10 +19,9 @@ void	ft_preformat_di(t_format *c_fmt, size_t len, char *str)
 	c_fmt->sign ? (to_add = '-') : (to_add = 0);
 	!(c_fmt->sign) && c_fmt->flag & 0x02 ? (to_add = '+') : 0;
 	!(c_fmt->sign) && c_fmt->flag & 0x01 & ~0x02 ? (to_add = ' ') : 0;
-	to_add && c_fmt->width ? (c_fmt->width--) : 0;
 	if (c_fmt->flag & 0x04)
 	{
-		gwrite(1, &to_add, 1);
+		to_add ? gwrite(1, &to_add, 1) : 0;
 		c_fmt->prec ? ft_putnchar('0', c_fmt->prec - ft_strlen(str)) : 0;
 		gwrite(1, str, ft_strlen(str)); // ft_putstr(str);
 		c_fmt->width > len ? ft_putnchar(' ', c_fmt->width - len) : 0;
@@ -31,7 +30,7 @@ void	ft_preformat_di(t_format *c_fmt, size_t len, char *str)
 	{
 		!(c_fmt->flag & 0x08)  && c_fmt->width > len ? 
 			ft_putnchar(' ', c_fmt->width - len) : 0;
-		gwrite(1, &to_add, 1);
+		to_add ? gwrite(1, &to_add, 1) : 0;
 		c_fmt-> flag & 0x08 && c_fmt->width > len ?
 			ft_putnchar('0', c_fmt->width - len) : 0;
 		c_fmt->prec ? ft_putnchar('0', c_fmt->prec - ft_strlen(str)) : 0;
