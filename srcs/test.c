@@ -15,10 +15,10 @@
 
 int		main(void)
 {
-	int a = 122;
+	int a = -122;
 
-	int out1 = printf("%d OG_PRINTF\n", a);
-	int out2 = ft_printf_struct("%d MY_PRINTF\n", a);
+	int out1 = printf("%-15.9d OG_PRINTF\n", a);
+	int out2 = ft_printf_struct("%-15.9d MY_PRINTF\n", a);
 	printf("%d %d\n", out1, out2);
 	return (0);
 }
