@@ -6,7 +6,7 @@
 /*   By: hshawand <hshawand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 11:47:44 by hshawand          #+#    #+#             */
-/*   Updated: 2019/08/12 15:31:30 by hshawand         ###   ########.fr       */
+/*   Updated: 2019/08/19 12:36:40 by hshawand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ void	ft_print_c(t_format *c_format, char c)
 {
 	char filler;
 
-	c_format->flag & 0x08 ? (filler = '0') : (filler = ' ');
+	c_format->flag & 0x08 ? (filler = '0') :
+		(filler = ' ');
 	if (c_format->flag & 0x04)
 	{
 		gwrite(1, &c, 1);
@@ -34,7 +35,8 @@ void	ft_print_s(t_format *c_format, char *str)
 	char			filler;
 	unsigned int	len;
 
-	c_format->flag & 0x08 ? (filler = '0') : (filler = ' ');
+	c_format->flag & 0x08 ? (filler = '0') :
+		(filler = ' ');
 	len = ft_strlen(str);
 	if (c_format->flag & 0x04)
 	{
