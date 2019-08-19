@@ -6,7 +6,7 @@
 /*   By: hshawand <hshawand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/24 13:45:33 by hshawand          #+#    #+#             */
-/*   Updated: 2019/08/15 14:23:51 by hshawand         ###   ########.fr       */
+/*   Updated: 2019/08/19 14:11:45 by hshawand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,30 +80,27 @@ static char		*ft_length_catch(char *flag, t_format *c_fmt)
 
 static char		*ft_type_catch(char *flag, t_format *c_fmt)
 {
-	while (!c_fmt->type && *flag)
-	{
-		if (*flag == 'c')
-			c_fmt->type = 'c';
-		else if (*flag == 's')
-			c_fmt->type = 's';
-		else if (*flag == 'p')
-			c_fmt->type = 'p';
-		else if (*flag == 'd')
-			c_fmt->type = 'd';
-		else if (*flag == 'i')
-			c_fmt->type = 'i';
-		else if (*flag == 'o')
-			c_fmt->type = 'o';
-		else if (*flag == 'u')
-			c_fmt->type = 'u';
-		else if (*flag == 'x')
-			c_fmt->type = 'x';
-		else if (*flag == 'X')
-			c_fmt->type = 'X';
-		else if (*flag == 'f')
-			c_fmt->type = 'f';
-		flag++;
-	}
+	if (*flag == 'c')
+		c_fmt->type = 'c';
+	else if (*flag == 's')
+		c_fmt->type = 's';
+	else if (*flag == 'p')
+		c_fmt->type = 'p';
+	else if (*flag == 'd')
+		c_fmt->type = 'd';
+	else if (*flag == 'i')
+		c_fmt->type = 'i';
+	else if (*flag == 'o')
+		c_fmt->type = 'o';
+	else if (*flag == 'u')
+		c_fmt->type = 'u';
+	else if (*flag == 'x')
+		c_fmt->type = 'x';
+	else if (*flag == 'X')
+		c_fmt->type = 'X';
+	else if (*flag == 'f')
+		c_fmt->type = 'f';
+	c_fmt->type ? (flag++) : 0;
 	return (flag);
 }
 
