@@ -6,7 +6,7 @@
 /*   By: svivienn <svivienn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 15:48:11 by boris             #+#    #+#             */
-/*   Updated: 2019/08/12 17:06:13 by svivienn         ###   ########.fr       */
+/*   Updated: 2019/08/20 15:06:08 by svivienn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ t_long_value	*fraction(int ot, int pow)
 	rez->value[0] = (ot == 0) ? 5 : 0;
 	pow += rez->value[0] == 5 ? 1 : 0;
 	rez->size = 1;
-	j = 52 - ot;
+	j = 52 - ot - (ot == 0 ? 1 : 0);
 	while (--j >= 0)
 	{
 		if (d.i >> j & 1)
