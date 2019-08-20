@@ -6,7 +6,7 @@
 /*   By: hshawand <hshawand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/19 12:42:35 by hshawand          #+#    #+#             */
-/*   Updated: 2019/08/19 13:03:34 by hshawand         ###   ########.fr       */
+/*   Updated: 2019/08/20 13:30:07 by hshawand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,6 @@ void			ft_print_p(t_format *c_format, void *ptr);
 void			ft_print_d(t_format *c_format, int64_t d);
 void			ft_print_ouxx(t_format *c_format, uint64_t d, char base,
 		char mode);
+void			ft_print_f(t_format *c_fmt, va_list args);
 
 #endif

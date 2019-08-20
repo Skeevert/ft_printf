@@ -6,7 +6,7 @@
 #    By: hshawand <hshawand@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/04 16:37:05 by hshawand          #+#    #+#              #
-#    Updated: 2019/08/19 12:39:08 by hshawand         ###   ########.fr        #
+#    Updated: 2019/08/20 13:36:22 by hshawand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -72,7 +72,15 @@ srcs/ft_printf.o \
 srcs/ft_itoa64.o \
 srcs/parser.o \
 srcs/scp.o \
-srcs/diouxx.o 
+srcs/diouxx.o \
+srcs/f_init.o \
+srcs/float/longarithmetic.o \
+srcs/float/printfloat.o \
+srcs/float/printnumber.o \
+srcs/float/prostonehvataetmesta.o \
+srcs/float/tolsforfloat.o \
+srcs/float/writefloat.o \
+srcs/float/writelongdouble.o \
 
 NAME = libftprintf.a
 
