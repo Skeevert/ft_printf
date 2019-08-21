@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include "main.h"
 
 void			normalize(t_long_value *x)
 {
@@ -37,7 +38,8 @@ int			sum(t_long_value *a, t_long_value *b)
 	if ((s = (int*)malloc(sizeof(int) * ((a->size > b->size) ? a->size + 1 :
 		b->size + 1))) == NULL)
 		return (0);
-	memset(s, 0, sizeof(int) * (a->size > b->size ? a->size + 1 : b->size + 1));//поменять на ft_memset
+	ft_memset(s, 0, sizeof(int) * (a->size > b->size ? a->size + 1 :
+		b->size + 1));
 	i = -1;
 	while (++i < a->size)
 		s[i] = a->value[i];
@@ -59,7 +61,7 @@ int			simplecom(t_long_value *a, t_long_value *b)
 
 	if ((rez = (int*)malloc(sizeof(int) * (a->size + b->size))) == NULL)
 		return (0);
-	memset(rez, 0, sizeof(*rez) * (a->size + b->size));//поменять на ft_memset
+	ft_memset(rez, 0, sizeof(*rez) * (a->size + b->size));
 	i = -1;
 	while (++i < a->size)
 	{

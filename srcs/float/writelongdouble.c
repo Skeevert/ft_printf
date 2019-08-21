@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include "main.h"
 
 int				initlwhole(t_long_value **rez)
 {
@@ -107,7 +108,7 @@ int				finalprintnahoild(t_format *inf)
 	char *str;
 
 	if (ld.ld != ld.ld)
-		write(1, "nan", 3);
+		gwrite(1, "nan", 3);
 	else if (ld.man == 0 && (ld.i[2] == 32767 || ld.i[2] == 65535))
 		lfiksfinal();
 	else if (ld.man == 0 && (ld.i[2] == 0 || ld.i[2] == 32768))

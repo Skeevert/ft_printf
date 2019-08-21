@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include "main.h"
 
 int		dexp(void)
 {
@@ -67,7 +68,7 @@ int		zerotofrc(t_long_value *frc, int prec)
 
 	if ((rez = (int*)malloc(sizeof(int) * prec)) == NULL)
 		return (0);
-	memset(rez, 0, sizeof(int) * prec);
+	ft_memset(rez, 0, sizeof(int) * prec);
 	i = -1;
 	while (++i < frc->size)
 		rez[prec - frc->size + i] = frc->value[i];

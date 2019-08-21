@@ -11,19 +11,20 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include "main.h"
 
 void	lfiksfinal(void)
 {
 	if (ld.i[2] == 32767)
-		write(1, "inf", 3);
+		gwrite(1, "inf", 3);
 	else
-		write(1, "-inf", 3);
+		gwrite(1, "-inf", 4);
 }
 
 void	fiksfinal(void)
 {
 	if (d.i == 0x7FF0000000000000)
-		write(1, "inf", 3);
+		gwrite(1, "inf", 3);
 	else
-		write(1, "-inf", 3);
+		gwrite(1, "-inf", 4);
 }

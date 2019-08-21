@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include "main.h"
 
 int		formfraction(size_t prec, t_long_value *frc)
 {
@@ -82,7 +83,7 @@ int		normwhole(t_long_value *wh, int plus)
 	{
 		if ((rez = (int*)malloc(sizeof(int) * (wh->size + 1))) == NULL)
 			return (0);
-		memcpy(rez, wh->value, sizeof(int) * wh->size - 1);//поменять на ft
+		ft_memcpy(rez, wh->value, sizeof(int) * wh->size - 1);
 		rez[wh->size - 1] = 0;
 		rez[wh->size] = 1;
 		free(wh->value);

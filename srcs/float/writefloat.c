@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include "main.h"
 
 t_long_value	*whole(int n)
 {
@@ -48,7 +49,7 @@ int				normrez(t_long_value **x, int pow)
 
 	if ((rez = (int*)malloc(sizeof(int) * pow)) == NULL)
 		return (0);
-	memset(rez, 0, sizeof(int) * pow);
+	ft_memset(rez, 0, sizeof(int) * pow);
 	i = 0;
 	while (++i && pow - i >= 0 && (*x)->size - i + 1 > 0)
 		rez[pow - i] = (*x)->value[(*x)->size - i];
@@ -123,17 +124,17 @@ char			*doubletonumber(t_long_value *wh, t_long_value *frc, int prec)
 		free(str1);
 		return (NULL);
 	}
-	strcat(str1, str2);
+	ft_strcat(str1, str2);
 	free(str2);
 	if (prec != 0)
 	{
-		strcat(str1, ".");
+		ft_strcat(str1, ".");
 		if (!(str2 = wholetostr(frc)))
 		{
 			free(str1);
 			return (NULL);
 		}
-		strcat(str1, str2);
+		ft_strcat(str1, str2);
 		free(str2);
 	}
 	return (str1);
