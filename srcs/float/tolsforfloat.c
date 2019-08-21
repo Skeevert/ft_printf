@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tolsforfloat.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svivienn <svivienn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: boris <boris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/05 20:14:40 by boris             #+#    #+#             */
-/*   Updated: 2019/08/12 16:45:36 by svivienn         ###   ########.fr       */
+/*   Updated: 2019/08/21 21:28:49 by boris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,13 @@ char	*doubletostr(int prec)
 	if (dexp() >= 0)
 	{
 		wh = whole(dexp());
-		frc = fraction(dexp(), 1);
+		frc = fraction(dexp(), 1, 0);
 	}
 	else
 	{
 		if (!initlwhole(&wh))
 			return (NULL);
-		frc = fraction(0, -(dexp()));
+		frc = fraction(0, -(dexp()), 1);
 	}
 	if (!normnumber(&wh, &frc, prec))
 		return (NULL);

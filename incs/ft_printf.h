@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svivienn <svivienn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: boris <boris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 16:49:45 by boris             #+#    #+#             */
-/*   Updated: 2019/08/20 13:36:00 by hshawand         ###   ########.fr       */
+/*   Updated: 2019/08/21 21:28:55 by boris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,13 @@ int							initbinpow(t_long_value **rez,
 t_long_value				*binpow(int n, int base);
 t_long_value				*whole(int n);
 int							normrez(t_long_value **x, int pow);
-t_long_value				*fraction(int ot, int pow);
+t_long_value				*fraction(int ot, int pow, int status);
 char						*wholetostr(t_long_value *wh);
 char						*doubletonumber(t_long_value *wh,
 								t_long_value *frc, int prec);
 int							initlwhole(t_long_value **rez);
 t_long_value				*lwhole(int n);
-t_long_value				*lfraction(int ot, int pow);
+t_long_value				*lfraction(int ot, int pow, int status);
 char						*ldoubletostr(int prec);
 int							finalprintnahoild(t_format *inf);
 int							formfraction(size_t prec, t_long_value *frc);

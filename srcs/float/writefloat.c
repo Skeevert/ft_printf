@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   writefloat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svivienn <svivienn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: boris <boris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 15:48:11 by boris             #+#    #+#             */
-/*   Updated: 2019/08/20 15:06:08 by svivienn         ###   ########.fr       */
+/*   Updated: 2019/08/21 21:28:50 by boris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,22 +68,21 @@ int				normrez(t_long_value **x, int pow)
 	return (1);
 }
 
-t_long_value	*fraction(int ot, int pow)
+t_long_value	*fraction(int ot, int pow, int status)
 {
 	t_long_value	*rez;
 	int				j;
 
-	if ((rez = (t_long_value*)malloc(sizeof(*rez))) == NULL)
+	if (!initlwhole(&rez))
 		return (NULL);
-	if ((rez->value = (int*)malloc(sizeof(int))) == NULL)
-	{
-		free(rez);
-		return (NULL);
-	}
-	rez->value[0] = (ot == 0) ? 5 : 0;
-	pow += rez->value[0] == 5 ? 1 : 0;
-	rez->size = 1;
-	j = 52 - ot - (ot == 0 ? 1 : 0);
+	if (status)
+		if (!normrez(&rez, pow))
+		{
+			free_long_value(&rez);
+			return (NULL);
+		}
+	pow += status ? 1 : 0;
+	j = 52 - ot;
 	while (--j >= 0)
 	{
 		if (d.i >> j & 1)

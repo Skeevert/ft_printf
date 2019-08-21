@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   writelongdouble.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svivienn <svivienn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: boris <boris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/09 15:51:08 by svivienn          #+#    #+#             */
-/*   Updated: 2019/08/12 17:13:17 by svivienn         ###   ########.fr       */
+/*   Updated: 2019/08/21 21:28:53 by boris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,14 +56,14 @@ t_long_value	*lwhole(int n)
 	return (rez);
 }
 
-t_long_value	*lfraction(int ot, int pow)
+t_long_value	*lfraction(int ot, int pow, int status)
 {
 	t_long_value	*rez;
 	int				j;
 
 	if (!initlwhole(&rez))
 		return (0);
-	j = 64 - ot - 1;
+	j = 64 - ot - status;
 	while (--j >= 0)
 	{
 		if (ld.man >> j & 1)
@@ -86,13 +86,13 @@ char			*ldoubletostr(int prec)
 	if (longdexp() >= 0)
 	{
 		wh = lwhole(longdexp());
-		frc = lfraction(longdexp(), 1);
+		frc = lfraction(longdexp(), 1, 1);
 	}
 	else
 	{
 		if (!initlwhole(&wh))
 			return (NULL);
-		frc = lfraction(0, -(longdexp()));
+		frc = lfraction(0, -(longdexp()), 0);
 	}
 	if (!normnumber(&wh, &frc, prec))
 		return (NULL);
