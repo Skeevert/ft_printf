@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   printnumber.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svivienn <svivienn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hshawand <hshawand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/11 07:58:43 by svivienn          #+#    #+#             */
-/*   Updated: 2019/08/12 16:51:08 by svivienn         ###   ########.fr       */
+/*   Updated: 2019/08/22 09:20:41 by hshawand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,24 +15,24 @@
 
 void	printnumber(t_format *inf, char *str, int zn, int zap)
 {
-	if (inf->width <= strlen(str) + zap || inf->flag >> 2 & 1)
+	if (inf->width <= ft_strlen(str) + zap || inf->flag >> 2 & 1)
 	{
 		preprint(zn, inf);
-		gwrite(1, str, strlen(str));
+		gwrite(1, str, ft_strlen(str));
 		(inf->flag >> 4 & 1 && inf->prec == 0) ? write(1, ".", 1) : 0;
-		printspase(' ', inf->width - strlen(str) - zap);
+		printspase(' ', inf->width - ft_strlen(str) - zap);
 	}
 	else if (inf->flag >> 3 & 1)
 	{
 		preprint(zn, inf);
-		printspase('0', inf->width - strlen(str) - zap);
-		gwrite(1, str, strlen(str));
+		printspase('0', inf->width - ft_strlen(str) - zap);
+		gwrite(1, str, ft_strlen(str));
 	}
 	else
 	{
-		printspase(' ', inf->width - strlen(str) - zap);
+		printspase(' ', inf->width - ft_strlen(str) - zap);
 		preprint(zn, inf);
-		gwrite(1, str, strlen(str));
+		gwrite(1, str, ft_strlen(str));
 	}
 	(inf->flag >> 4 & 1 && inf->prec == 0 && (!(inf->flag >> 2 & 1))) ?
 		gwrite(1, ".", 1) : 0;

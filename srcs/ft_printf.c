@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   printf_struct.c                                    :+:      :+:    :+:   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hshawand <hshawand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 13:42:41 by hshawand          #+#    #+#             */
-/*   Updated: 2019/08/20 13:29:10 by hshawand         ###   ########.fr       */
+/*   Updated: 2019/08/22 09:35:40 by hshawand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ void	ft_struct_process(t_format *c_format, va_list args)
 {
 	if (c_format->type == 'c')
 		ft_print_c(c_format, va_arg(args, int));
+	else if (c_format->type == '%')
+		ft_print_c(c_format, '%');
 	else if (c_format->type == 's')
 		ft_print_s(c_format, va_arg(args, char *));
 	else if (c_format->type == 'p')

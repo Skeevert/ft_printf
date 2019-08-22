@@ -1,16 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   diouxX.c                                           :+:      :+:    :+:   */
+/*   diouxx.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hshawand <hshawand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 15:09:05 by hshawand          #+#    #+#             */
-/*   Updated: 2019/08/19 12:44:26 by hshawand         ###   ########.fr       */
+/*   Updated: 2019/08/22 13:18:28 by hshawand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
+
+void	ft_zero_zero(t_format *c_fmt, char *str, char base)
+{
+	if (c_fmt->prec_set && !(c_fmt->prec))
+	{
+		if (base == 8 && c_fmt->flag & 0x10)
+			ft_strcpy(str, "0");
+		else
+			ft_strcpy(str, "");
+	}
+	c_fmt->flag &= ~0x10;
+}
 
 void	ft_preformat_di(t_format *c_fmt, size_t len, char *str)
 {
@@ -18,9 +30,8 @@ void	ft_preformat_di(t_format *c_fmt, size_t len, char *str)
 
 	c_fmt->sign ? (to_add = '-') :
 		(to_add = 0);
+	!(c_fmt->sign) && c_fmt->flag & 0x01 ? (to_add = ' ') : 0;
 	!(c_fmt->sign) && c_fmt->flag & 0x02 ? (to_add = '+') : 0;
-	!(c_fmt->sign) && c_fmt->flag & 0x01 & ~0x02 ? (to_add = ' ') : 0;
-	to_add && c_fmt->prec ? (c_fmt->prec++) : 0;
 	c_fmt->prec ? c_fmt->width -= c_fmt->prec : 0;
 	if (c_fmt->flag & 0x04)
 	{
@@ -53,8 +64,8 @@ void	ft_preformat_ouxx(t_format *c_format, char base, char mode, char *str)
 		(len = ft_strlen(str));
 	if (c_format->flag & 0x04)
 	{
-		c_format->flag & 0x10 ? ft_putstr(to_add) : 0;
-		c_format->prec ? ft_putnchar('0', c_format->prec - ft_strlen(str)) : 0;
+		c_format->flag & 0x10 ? gwrite(1, to_add, ft_strlen(to_add)) : 0;
+		c_format->prec ? ft_putnchar('0', c_format->prec) : 0;
 		gwrite(1, str, ft_strlen(str));
 		c_format->width > len ? ft_putnchar(' ', c_format->width - len) : 0;
 	}
@@ -62,10 +73,10 @@ void	ft_preformat_ouxx(t_format *c_format, char base, char mode, char *str)
 	{
 		!(c_format->flag & 0x08) && c_format->width > len ?
 			ft_putnchar(' ', c_format->width - len) : 0;
-		c_format->flag & 0x10 ? ft_putstr(to_add) : 0;
+		c_format->flag & 0x10 ? gwrite(1, to_add, ft_strlen(to_add)) : 0;
 		c_format->flag & 0x08 && c_format->width > len ?
 			ft_putnchar('0', c_format->width - len) : 0;
-		c_format->prec ? ft_putnchar('0', c_format->prec - ft_strlen(str)) : 0;
+		c_format->prec ? ft_putnchar('0', c_format->prec) : 0;
 		gwrite(1, str, ft_strlen(str));
 	}
 }
@@ -87,10 +98,11 @@ void	ft_print_d(t_format *c_fmt, int64_t d)
 		ft_itoa64((char)d, output, c_fmt);
 	else if (c_fmt->length == 0)
 		ft_itoa64((int)d, output, c_fmt);
+	d ? 0 : ft_zero_zero(c_fmt, output, 10);
 	len = ft_strlen(output);
 	c_fmt->prec ? (c_fmt->flag &= ~0x08) : 0;
-	c_fmt->sign || (c_fmt->flag & 0x03) ? (len++) : 0;
 	c_fmt->prec = c_fmt->prec > len ? c_fmt->prec - len : 0;
+	c_fmt->sign || (c_fmt->flag & 0x03) ? (len++) : 0;
 	c_fmt->width = c_fmt->width < c_fmt->prec ?
 		c_fmt->prec : c_fmt->width;
 	ft_preformat_di(c_fmt, len, output);
@@ -114,10 +126,11 @@ void	ft_print_ouxx(t_format *c_fmt, uint64_t d, char base, char mode)
 	else if (c_fmt->length == 0)
 		ft_utoa64_base((unsigned int)d, output, base, mode);
 	len = ft_strlen(output);
+	d ? 0 : ft_zero_zero(c_fmt, output, base);
 	c_fmt->prec ? (c_fmt->flag &= ~0x08) : 0;
 	c_fmt->prec = c_fmt->prec > len ? c_fmt->prec - len : 0;
 	c_fmt->width = c_fmt->width < c_fmt->prec ?
 		c_fmt->prec : c_fmt->width;
-	c_fmt->prec > len ? c_fmt->width -= c_fmt->prec : 0;
+	c_fmt->prec ? c_fmt->width -= c_fmt->prec : 0;
 	ft_preformat_ouxx(c_fmt, base, mode, output);
 }

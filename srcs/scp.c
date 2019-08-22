@@ -6,7 +6,7 @@
 /*   By: hshawand <hshawand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 11:47:44 by hshawand          #+#    #+#             */
-/*   Updated: 2019/08/19 12:36:40 by hshawand         ###   ########.fr       */
+/*   Updated: 2019/08/22 11:52:07 by hshawand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,15 @@ void	ft_print_s(t_format *c_format, char *str)
 {
 	char			filler;
 	unsigned int	len;
-
+	if (!str)
+	{
+		ft_print_s(c_format, "(null)");
+		return ;
+	}
 	c_format->flag & 0x08 ? (filler = '0') :
 		(filler = ' ');
 	len = ft_strlen(str);
+	c_format->prec_set && len > c_format->prec ? (len = c_format->prec) : 0;
 	if (c_format->flag & 0x04)
 	{
 		gwrite(1, str, len);

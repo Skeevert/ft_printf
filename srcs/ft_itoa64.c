@@ -6,7 +6,7 @@
 /*   By: hshawand <hshawand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 15:47:23 by svivienn          #+#    #+#             */
-/*   Updated: 2019/08/19 12:55:00 by hshawand         ###   ########.fr       */
+/*   Updated: 2019/08/22 10:42:17 by hshawand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	ft_itoa64(int64_t c, char *str, t_format *c_fmt)
 	c < 0 ? (u_save = -c) :
 		(u_save = c);
 	c_fmt->sign = c < 0 ? 1 : 0;
-	while (u_save > 1)
+	while (u_save / 10 > 0)
 	{
 		u_save /= 10;
 		size++;
@@ -32,7 +32,7 @@ void	ft_itoa64(int64_t c, char *str, t_format *c_fmt)
 	str[size] = '\0';
 	c < 0 ? (u_save = -c) :
 		(u_save = c);
-	while (u_save != 0)
+	while (u_save > 0)
 	{
 		str[size - 1] = (u_save % 10) + '0';
 		size--;
@@ -49,14 +49,15 @@ void	ft_utoa64_base(uint64_t c, char *str, char base, char mode)
 
 	size = 1;
 	u_save = c;
-	while (c > 1)
+	while (u_save / base > 0)
 	{
-		c /= base;
+		u_save /= base;
 		size++;
 	}
 	str[0] = '0';
 	str[size] = '\0';
-	while (u_save != 0)
+	u_save = c;
+	while (u_save > 0)
 	{
 		if (!mode)
 			str[size - 1] = mode_0[u_save % base];

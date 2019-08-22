@@ -6,7 +6,7 @@
 /*   By: hshawand <hshawand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/24 13:45:33 by hshawand          #+#    #+#             */
-/*   Updated: 2019/08/19 14:11:45 by hshawand         ###   ########.fr       */
+/*   Updated: 2019/08/22 13:13:21 by hshawand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static char		*ft_width_prec_catch(char *flag, t_format *c_fmt)
 	if (*flag == '.')
 	{
 		flag++;
-		c_fmt->prec_set |= 1;
+		c_fmt->prec_set = 1;
 		c_fmt->prec = ft_atoi(flag);
 		while (*flag >= '0' && *flag <= '9')
 			flag++;
@@ -100,6 +100,8 @@ static char		*ft_type_catch(char *flag, t_format *c_fmt)
 		c_fmt->type = 'X';
 	else if (*flag == 'f')
 		c_fmt->type = 'f';
+	else if (*flag == '%')
+		c_fmt->type = '%';
 	c_fmt->type ? (flag++) : 0;
 	return (flag);
 }
@@ -112,11 +114,6 @@ char			*ft_struct_fill(char *flag_start, va_list args)
 	ft_bzero(&c_fmt, sizeof(c_fmt));
 	flag = flag_start;
 	flag++;
-	if (*flag == '%')
-	{
-		write(1, "%", 1);
-		return (flag + 1);
-	}
 	flag = ft_flag_catch(flag, &c_fmt);
 	flag = ft_width_prec_catch(flag, &c_fmt);
 	flag = ft_length_catch(flag, &c_fmt);
