@@ -6,7 +6,7 @@
 /*   By: hshawand <hshawand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 15:09:05 by hshawand          #+#    #+#             */
-/*   Updated: 2019/08/22 13:18:28 by hshawand         ###   ########.fr       */
+/*   Updated: 2019/08/22 15:04:42 by hshawand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,7 @@ void	ft_print_ouxx(t_format *c_fmt, uint64_t d, char base, char mode)
 	len = ft_strlen(output);
 	d ? 0 : ft_zero_zero(c_fmt, output, base);
 	c_fmt->prec ? (c_fmt->flag &= ~0x08) : 0;
+	c_fmt->prec && c_fmt->flag & 0x10 && base == 8 ? c_fmt->prec-- : 0;
 	c_fmt->prec = c_fmt->prec > len ? c_fmt->prec - len : 0;
 	c_fmt->width = c_fmt->width < c_fmt->prec ?
 		c_fmt->prec : c_fmt->width;

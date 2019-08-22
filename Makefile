@@ -6,7 +6,7 @@
 #    By: hshawand <hshawand@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/04 16:37:05 by hshawand          #+#    #+#              #
-#    Updated: 2019/08/20 13:36:22 by hshawand         ###   ########.fr        #
+#    Updated: 2019/08/22 14:04:22 by hshawand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -90,7 +90,7 @@ $(NAME): $(OBJECTS)
 	ar rc $@ $(OBJECTS)
 
 $(OBJECTS): %.o: %.c
-	gcc -c -Wall -Wextra -Werror $< -o $@ -Iincs
+	gcc -c -Wall -Wextra -Werror $< -o $@ -Iincludes
 
 clean:
 	rm -f $(OBJECTS)
