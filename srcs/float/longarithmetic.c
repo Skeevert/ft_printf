@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   longarithmetic.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svivienn <svivienn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hshawand <hshawand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/09 13:34:51 by svivienn          #+#    #+#             */
-/*   Updated: 2019/08/12 16:32:51 by svivienn         ###   ########.fr       */
+/*   Updated: 2019/08/22 09:12:14 by hshawand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void			normalize(t_long_value *x)
 		x->size--;
 }
 
-int			sum(t_long_value *a, t_long_value *b)
+int				sum(t_long_value *a, t_long_value *b)
 {
 	unsigned long long int	i;
 	int						*s;
@@ -53,7 +53,7 @@ int			sum(t_long_value *a, t_long_value *b)
 	return (1);
 }
 
-int			simplecom(t_long_value *a, t_long_value *b)
+int				simplecom(t_long_value *a, t_long_value *b)
 {
 	int						*rez;
 	unsigned long long int	i;
@@ -78,7 +78,7 @@ int			simplecom(t_long_value *a, t_long_value *b)
 	return (1);
 }
 
-int			initbinpow(t_long_value **rez, t_long_value **pow, int base)
+int				initbinpow(t_long_value **rez, t_long_value **pow, int base)
 {
 	if ((*rez = (t_long_value*)malloc(sizeof(**rez))) == NULL)
 		return (0);
@@ -115,13 +115,13 @@ t_long_value	*binpow(int n, int base)
 	while (n)
 	{
 		if (n & 1)
-			if (!simplecom(rez, pow))//оптимизейшн
+			if (!simplecom(rez, pow))
 			{
 				free_long_value(&rez);
 				free_long_value(&pow);
 				return (NULL);
 			}
-		if (!simplecom(pow, pow))//оптимизейшн
+		if (!simplecom(pow, pow))
 		{
 			free_long_value(&rez);
 			free_long_value(&pow);
